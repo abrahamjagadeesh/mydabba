@@ -1,0 +1,27 @@
+nav ul,nav ol {
+    list-style: none;
+    list-style-image: none;
+    margin:0;
+    padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6{
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+}
+
+p{
+	margin-top: 0;
+	margin-bottom: 0.5em;
+	margin-bottom: 0.5rem;
+}
+
+a{
+	text-decoration: none;
+}
+
+hr{	
+	//background-color: $prime;
+	border: 0 none;
+	height: 1px;
+}

@@ -1,0 +1,38 @@
+.tick {
+	border: 1px solid #ff0000;
+	font-size: 14px;
+	height: 30px;
+	line-height: 30px;
+	margin: 10px 100px;
+	padding: 0 0 0 10px;	
+	overflow: hidden;
+}
+.ticker {
+	@extend .clearfix;
+	position: relative;
+	left: 0;
+	@include transition(all 60s);	
+}
+.ticker li {
+	float: left;
+	padding: 0 10px 0 0;
+	white-space: nowrap;
+}
+
+.tick-head-tail{
+	position: relative;
+}
+
+.ticker-head,
+.ticker-tail{
+	height: 100%;
+	min-width: 100px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.ticker-tail{
+	left: auto;
+	right: 0;
+}

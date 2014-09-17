@@ -1,0 +1,129 @@
+@import 'compass';
+@import 'gallery/reset';
+@import 'animate/animate';
+@import 'animate/zoomInUp';
+@import 'animate/zoomOut';
+@import 'animate/fadeInRight';
+@import 'animate/zoomIn';
+@import 'animate/bounceIn';
+
+html,
+body{
+	overflow-x:hidden;
+}
+
+.plot{
+	//overflow: hidden;
+	/*remove width later*/
+	max-width:1200px;
+	margin:0 auto;
+}
+
+.bgAsSource .lid{
+	background-size: contain;
+	background-position:center;
+	background-repeat: no-repeat;
+}
+
+
+.bucket {
+	z-index: 0;	
+	position: absolute;	
+	top: 0;
+	left:0;
+	//opacity: 0;
+	text-align: center;
+	will-change: transform, opacity;
+	
+	.lid{
+		will-change: transform, opacity;
+	}
+
+	img{
+		max-width: 100%;
+		display: inline-block;
+		vertical-align: middle;
+		will-change: transform, opacity;
+	}
+}
+
+
+
+
+.level-one{
+	position: relative;
+}
+
+.level-two{	
+	will-change: transform, opacity;
+	@include transition(all 0.6s);
+}
+
+html .noAnimate .level-two{
+	@include transition(all 0s);
+}
+
+
+.currentSlider{
+}
+
+.activeSlider{
+	z-index: 2;
+	opacity: 1;
+}
+
+
+
+.activeSlider .lid{	
+	@extend .animated;
+	//@extend .fadeInRight;
+}
+
+.oldSlide .lid{
+	@extend .animated;	
+	@extend .zoomOut;
+}
+
+
+.controlHeight{
+	img{
+		max-width: none;
+		height: 100%;
+	}
+}
+
+
+
+/*theme*/
+
+.btn-fs-open,
+.btn-fs-close,
+.btn-L-left,
+.btn-L-right{
+	position: absolute;
+	cursor: pointer;
+	z-index: 3;
+}
+
+
+.btn-L-left,
+.btn-L-right{	
+	margin-top: -36px;	
+	right: 0;
+	top: 50%;
+}
+
+.btn-L-left {
+	left: 0;
+	right: auto;
+}
+
+.btn-fs-close,
+.btn-fs-open {	
+	right: 0;
+	top: 0;
+}
+
+.btn-fs-close{
+	display: none;
+}

@@ -1,0 +1,112 @@
+@mixin clearfix() {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.clearfix{
+	@include clearfix();
+}
+
+
+.with-space {
+	margin-bottom: 1rem;
+	margin-top: 0.5rem;
+}
+
+.space{
+	margin-bottom: 1rem;
+}
+
+hr.space{
+	height: 0;
+	overflow: hidden;
+}
+
+
+.pad{
+	padding-left: 1em;
+	padding-right: 1em;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.void{
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+.none{
+	display: none;
+}
+.block{
+	display: block;
+}
+.inline{
+	display: inline;
+}
+.inline-block{
+	@include inline-block;
+}
+
+
+.right{
+	float: right;
+}
+
+.left{
+	float: left;
+}
+
+.abs{
+	position: absolute;
+}
+
+.rel{
+	position: relative;
+}
+
+.push-right{
+	right: 0;
+	left: auto;
+}
+
+.push-left{
+	right: auto;
+	left: 0;
+}
+
+.center{
+	margin: 0 auto;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.text-right{
+	text-align: right;
+}
+
+.text-left{
+	text-align: left;
+}
+
+.always-text-right{
+	text-align: right !important;
+}
+.always-text-left{
+	text-align: left !important;
+}
+.always-text-center{
+	text-align: center !important;
+}
+
+

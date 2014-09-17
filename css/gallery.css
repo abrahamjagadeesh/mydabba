@@ -1,0 +1,269 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*!
+Animate.css - http://daneden.me/animate
+Licensed under the MIT license - http://opensource.org/licenses/MIT
+
+Copyright (c) 2014 Daniel Eden
+*/
+.animated, .activeSlider .lid, .oldSlide .lid {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+}
+
+.animated.infinite, .activeSlider .infinite.lid, .oldSlide .infinite.lid {
+  animation-iteration-count: infinite;
+}
+
+.animated.hinge, .activeSlider .hinge.lid, .oldSlide .hinge.lid {
+  animation-duration: 2s;
+}
+
+@keyframes zoomInUp {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+}
+.zoomInUp {
+  animation-name: zoomInUp;
+}
+
+@keyframes zoomOut {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+.zoomOut, .oldSlide .lid {
+  animation-name: zoomOut;
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+.fadeInRight {
+  animation-name: fadeInRight;
+}
+
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+.zoomIn {
+  animation-name: zoomIn;
+}
+
+@keyframes bounceIn {
+  0%, 20%, 40%, 60%, 80%, 100% {
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    transform: scale3d(0.97, 0.97, 0.97);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+.bounceIn {
+  animation-name: bounceIn;
+  animation-duration: .75s;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+.plot {
+  /*remove width later*/
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bgAsSource .lid {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bucket {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  will-change: transform, opacity;
+}
+.bucket .lid {
+  will-change: transform, opacity;
+}
+.bucket img {
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  will-change: transform, opacity;
+}
+
+.level-one {
+  position: relative;
+}
+
+.level-two {
+  will-change: transform, opacity;
+  -moz-transition: all 0.6s;
+  -o-transition: all 0.6s;
+  -webkit-transition: all 0.6s;
+  transition: all 0.6s;
+}
+
+html .noAnimate .level-two {
+  -moz-transition: all 0s;
+  -o-transition: all 0s;
+  -webkit-transition: all 0s;
+  transition: all 0s;
+}
+
+.activeSlider {
+  z-index: 2;
+  opacity: 1;
+}
+
+.controlHeight img {
+  max-width: none;
+  height: 100%;
+}
+
+/*theme*/
+.btn-fs-open,
+.btn-fs-close,
+.btn-L-left,
+.btn-L-right {
+  position: absolute;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.btn-L-left,
+.btn-L-right {
+  margin-top: -36px;
+  right: 0;
+  top: 50%;
+}
+
+.btn-L-left {
+  left: 0;
+  right: auto;
+}
+
+.btn-fs-close,
+.btn-fs-open {
+  right: 0;
+  top: 0;
+}
+
+.btn-fs-close {
+  display: none;
+}

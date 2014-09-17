@@ -1,0 +1,389 @@
+@import 'animate/animate';
+@import 'animate/fadeInRight';
+@import 'animate/zoomOut';
+@import 'animate/zoomIn';
+@import 'animate/fadeInLeft';
+@import 'animate/fadeOutLeft';
+
+@mixin keyframe ($animation_name) {
+	@-webkit-keyframes $animation_name {
+		@content;
+	}
+
+	@-moz-keyframes $animation_name {
+		@content;
+	}
+
+	@-ms-keyframes $animation_name {
+		@content;
+	}
+
+	@keyframes $animation_name {
+		@content;
+	}
+}
+
+
+@mixin animation ( $animation, $duration,$delay) {
+	animation: $animation $duration ease-in $delay;
+	-webkit-animation: $animation $duration ease-in $delay;
+	-moz-animation: $animation $duration ease-in $delay;
+	-ms-animation: $animation $duration ease-in $delay;
+}
+
+
+
+:-webkit-full-screen {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	background: none;
+}
+
+html,
+body{
+	min-height:100%;
+}
+
+#gallery{
+	max-width:1200px;
+	margin:0 auto;
+}
+
+.slider {
+	width: 100%;
+	overflow: hidden;
+	max-width: 1200px;
+	background-color: #fff;
+	margin:0 auto;
+}
+
+.fullScreen.slider{
+	max-width: 100%;
+}
+
+.bucket {	
+	float: left;	
+	overflow: hidden;
+	text-align: center;
+	z-index: 0;	
+	position: relative;
+	border: 0;
+	box-shadow: 0 0 0 0 #DBDBDB;
+	margin: 0;
+	overflow: hidden;
+	//@include transition(all 0.6s);
+}
+
+.level-two,
+.thumbCover{
+	position: relative;
+	left: 0;
+}
+
+.slide .level-two,
+.thumbCover{
+	@include transition(all 0.3s);
+}
+
+.noAnimate .bucket,
+.noAnimate .level-two{
+	@include transition(all 0s);
+}
+
+.level-two iframe,
+.level-two img {	
+	max-width: none;
+	width: auto;
+	display:block;
+}
+.level-two iframe {
+	width: 100%;
+}
+.level-two {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	@extend .clearfix;
+}
+.level-one {
+	position: relative;
+}
+
+.btn-L-left,
+.btn-L-right{
+	cursor: pointer;
+	margin-top: -36px;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	z-index: 1;
+}
+
+.btn-L-left {
+	left: 0;
+	right: auto;
+}
+
+.slider .fa {
+	background-color: rgba(0, 0, 0, 0.4);
+	color: rgba(255, 255, 255, 1);
+	padding: 20px;
+}
+
+
+
+
+
+
+
+.thumbPlaceholder {	
+	position: relative;
+	margin: 20px auto;
+	padding: 0;
+}
+.thumbNavigation {
+	overflow: hidden;
+	margin:0 60px;
+}
+
+
+.thumbPlaceholder .fa {
+	padding: 15px;
+}
+
+.large-rotator,
+.large-rotator-right,
+.large-rotator-left {
+	position: absolute;
+	right: 0;
+	top: 47%;
+	z-index: 52;
+	cursor: pointer;
+}
+.large-rotator-left {
+	left: 0;
+	right: auto;
+}
+
+.lessThumbs .thumb-left,
+.lessThumbs .thumb-right {
+	display: none;
+}
+.lessThumbs .thumbNavigation {
+	text-align: center;
+}
+.lessThumbs .thumbCover {	
+	@extend .inline-block;
+}
+
+
+.thumbImage,
+.bucket {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent;
+	background-size: auto 100%;
+}
+.thumbImage {
+	float: left;
+	cursor: pointer;
+}
+.thumbImage img,
+.thumbImage figure{
+	display:block;
+	max-width:100%;
+	margin:0 auto;
+}
+
+.thumbImage figure{
+	border:2px lightgreen solid;
+}
+
+.thumbImage.currentSlider img,
+.thumbImage.currentSlider a{
+	background-color:orange;
+}
+
+.thumbImage.currentSlider {
+	//	border: 1px solid #DFDFDF;
+}
+
+.dotNavigation figure {
+	background-color: #efefef;
+	border-radius: 50%;
+	@include inline-block;
+	@include box-shadow(1px 2px 5px 0 #b0b0b0 inset);
+	height: 20px;
+	margin: 0 3px;
+	width: 20px;
+	cursor: pointer;
+}
+
+.dotNavigation{
+	margin:0 auto;
+	width:100%;
+	text-align:center;
+}
+
+.dotMenu.currentSlider {
+	background-color: lightblue;
+}
+
+
+.bucket{
+	background-color: orange;
+}
+
+.entitle {
+	background-color: rgba(0, 0, 0, 0.5);
+	bottom: 0;
+	color: #fff;
+	left: 0;
+	padding: 10px 20px;
+	position: absolute;
+	text-align: left;
+	width: 100%;
+}
+
+.btn-fs-close,
+.btn-fs-open {
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 1;
+}
+
+.fa-rotate-45{
+	@include transform(rotate(-45deg));
+}
+
+
+.slider .btn-fs-close .fa,
+.slider .btn-fs-open .fa {
+	background-color: transparent;
+	color: #000;
+	cursor: pointer;
+}
+
+
+.bucket.currentSlider{
+	//@extend .slideLeft;
+	//@extend .bounceIn;
+	//@extend .animated;
+}
+
+.bucket.lastSlider{
+	//@include transform3d(translatex(100%));
+}
+
+
+.hasReachedEnd .level-two{
+	@include transition(all 0.3s);
+}
+
+.hasReachedEnd .level-one{
+	@include box-shadow(0 0 5em 1em lightblue inset);
+}
+
+.reachedEnd{	
+	@include transform3d(translatex(-1%));
+}
+.reachedReverseEnd{	
+	@include transform3d(translatex(1%));
+}
+
+.level-one-controls {
+	height: 100%;
+	position: absolute;
+	width: 100%;
+	z-index: 2;
+}
+
+.btn-fs-close{
+	display:none;
+}
+
+.fullScreen {
+	.btn-fs-open{
+		display: none;
+	}
+	.btn-fs-close{
+		display: block;
+	}
+	.bucket,
+	.level-one{
+		height:100%;
+	}
+	.dotNavigation{
+		position: absolute;
+		bottom:30px;		
+		width:100%;
+	}
+	.level-two{
+		height: 100% !important;
+	}
+}
+
+.autoHeight .level-two{
+	@extend .clearfix;
+}
+
+.hasIrregularImages {
+	img{
+		visibility: hidden;
+	}
+	.bucket{
+		background: no-repeat center center orange;		
+		background-size: contain;
+	}
+}
+
+.bucket{
+	img{
+		max-width: 100%;
+	}
+}
+
+.stack{
+	.bucket {
+		float: none;
+		left: 0;
+		position: absolute;
+		top: 0;
+		opacity: 0;
+	}
+	.bucket.oldSlide{
+		transform: translate3d(0px, 0px, 0px);
+	}
+	.currentSlider{
+		opacity: 1
+	}
+	.oldSlide{
+		@extend .animated;
+		@extend .zoomOut;
+	}
+	.currentSlider{
+		@extend .animated;
+		@extend .zoomIn;	
+		z-index: 1
+	}
+}
+.stack.reverse {
+	.oldSlide{	
+		@extend .zoomOut;
+	}
+	.currentSlider{	
+		@extend .zoomIn;
+	}
+}
+
+.bucket.oldSlide {
+	//transform: translate3d(100%, 0px, 0px);
+}
+
+.level-two{
+	@include transition(all 0.3s);
+}
+
+

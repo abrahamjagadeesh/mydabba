@@ -1,0 +1,38 @@
+/*distribute columns equally*/
+/*used in horizontal menu*/
+
+.column{
+	display: table;
+	width: 100%;	
+}
+.cell{
+	display: table-cell;
+	@extend .text-center;
+	@extend .rel;
+}
+.cell > a{
+	@extend .block;
+}
+.minor{
+	@extend .abs;
+}
+.minor > .cell{
+	@extend .block;
+	@extend .text-left;
+}
+.with-single-border > .cell{
+	border: 1px #dfdfdf solid;
+	border-width: 0 0 0 1px ; 
+}
+.with-single-border > .cell:first-child{
+	border-width: 0;
+}
+.icons-cell{
+	width: 210px;
+}
+.icons-cell > a{
+	@extend .inline-block;
+}
+.seperator-cell{
+	width: 650px;
+}
