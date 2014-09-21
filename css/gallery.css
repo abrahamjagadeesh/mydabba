@@ -52,7 +52,7 @@ table {
   border-spacing: 0;
 }
 
-/*!
+/*
 Animate.css - http://daneden.me/animate
 Licensed under the MIT license - http://opensource.org/licenses/MIT
 
@@ -84,6 +84,7 @@ Copyright (c) 2014 Daniel Eden
     animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
   }
 }
+
 .zoomInUp {
   animation-name: zoomInUp;
 }
@@ -102,6 +103,7 @@ Copyright (c) 2014 Daniel Eden
     opacity: 0;
   }
 }
+
 .zoomOut, .oldSlide .lid {
   animation-name: zoomOut;
 }
@@ -117,6 +119,7 @@ Copyright (c) 2014 Daniel Eden
     transform: none;
   }
 }
+
 .fadeInRight {
   animation-name: fadeInRight;
 }
@@ -131,6 +134,7 @@ Copyright (c) 2014 Daniel Eden
     opacity: 1;
   }
 }
+
 .zoomIn {
   animation-name: zoomIn;
 }
@@ -167,6 +171,7 @@ Copyright (c) 2014 Daniel Eden
     transform: scale3d(1, 1, 1);
   }
 }
+
 .bounceIn {
   animation-name: bounceIn;
   animation-duration: .75s;
@@ -175,6 +180,7 @@ Copyright (c) 2014 Daniel Eden
 html,
 body {
   overflow-x: hidden;
+  min-height: 100%;
 }
 
 .plot {
@@ -213,16 +219,16 @@ body {
 
 .level-two {
   will-change: transform, opacity;
+  -webkit-transition: all 0.6s;
   -moz-transition: all 0.6s;
   -o-transition: all 0.6s;
-  -webkit-transition: all 0.6s;
   transition: all 0.6s;
 }
 
 html .noAnimate .level-two {
+  -webkit-transition: all 0s;
   -moz-transition: all 0s;
   -o-transition: all 0s;
-  -webkit-transition: all 0s;
   transition: all 0s;
 }
 
