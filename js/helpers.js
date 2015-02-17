@@ -1,14 +1,21 @@
 define(["jquery", "mainClass", "checkCssSupport"], function ($, Gallery, checkCssSupport) {
 
+    Gallery.prototype.rebuild = function () {
+        var base = this;
+        //base.$el.removeClass();
+        base.$el.find('.level-three').remove();
+        base.cloneFirst && base.cloneFirst.remove();
+        base.clonelast && base.clonelast.remove();
+    };
 
     Gallery.prototype.createHTMLForCyclic = function () {
-        var base = this,
 
-            cloneFirst = base.wrapper.filter(":lt(" + base.options.multipleSlides + ")").clone(true),
-            clonelast = base.wrapper.filter(":gt(" + (base.noOfSlides - base.options.multipleSlides - 1) + ")").clone(true);
+        var base = this;
 
-        base.subPlaceholder.append(cloneFirst).prepend(clonelast);
+        base.cloneFirst = base.wrapper.filter(":lt(" + base.options.multipleSlides + ")").clone(true);
+        base.clonelast = base.wrapper.filter(":gt(" + (base.noOfSlides - base.options.multipleSlides - 1) + ")").clone(true);
 
+        base.subPlaceholder.append(base.cloneFirst).prepend(base.clonelast);
         base.tracking();
         base.current = base.options.multipleSlides;
 
@@ -39,21 +46,22 @@ define(["jquery", "mainClass", "checkCssSupport"], function ($, Gallery, checkCs
         base.isResponsive = base.fnIsResponsive();
 
         /*calculate*/
-        base.wrapper.xSize = (base.isResponsive ? base.wWindow.width() : base.$el.width()) / base.options.multipleSlides;
+        base.xSize = (base.isResponsive ? base.wWindow.width() : base.$el.width()) / base.options.multipleSlides;
 
         //        if (base.options.maxHeight > 0) {
-        //            base.wrapper.ySize = (base.options.maxHeight * base.wrapper.xSize) / base.options.maxHeight;
+        //            base.ySize = (base.options.maxHeight * base.xSize) / base.options.maxHeight;
         //        }
 
         if (base.isFullScreen) {
-            base.wrapper.xSize = base.screen.width;
-            base.wrapper.ySize = base.screen.height;
+            base.xSize = base.screen.width;
+            base.ySize = base.screen.height;
         }
 
         /*set*/
-        base.wrapper.width(base.wrapper.xSize);
+        base.wrapper.width(base.xSize);
 
-        base.totalSliderWidth = base.wrapper.xSize * base.noOfSlides * base.options.multipleSlides;
+        //base.totalSliderWidth = base.xSize * base.noOfSlides * base.options.multipleSlides;
+        base.totalSliderWidth = base.xSize * base.noOfSlides;
         base.subPlaceholder.width(base.totalSliderWidth);
 
         base.setLayout();
@@ -63,14 +71,26 @@ define(["jquery", "mainClass", "checkCssSupport"], function ($, Gallery, checkCs
     Gallery.prototype.setLayout = function () {
         var base = this;
 
-        if (base.options.multipleSlides > 1) {
-            var slide = 0;
-            for (slide; slide < base.noOfSlides; slide++) {
-                var pointsToMove = slide * base.wrapper.xSize;
+        var slide = 0;
+        for (slide; slide < base.noOfSlides; slide++) {
+            //var pointsToMove = (base.options.multipleSlides > 1) ? (slide * base.xSize) : 0;
+            var pointsToMove = slide * base.xSize;
+
+            if (base.isTranslate3d) {
                 base.wrapper.eq(slide).css({
                     "transform": "translate3d(" + pointsToMove + "px,0,0)"
                 });
+            } else if (base.isTranslate2d) {
+                base.wrapper.eq(slide).css({
+                    "transform": "translate(" + pointsToMove + "px,0)"
+                });
+            } else {
+                base.wrapper.eq(slide).css({
+                    "left": pointsToMove + "px"
+                });
             }
+
+
         }
     };
 
@@ -91,45 +111,54 @@ define(["jquery", "mainClass", "checkCssSupport"], function ($, Gallery, checkCs
 
     };
 
-    Gallery.prototype.scrollscreen = function (reachedEnd, reachedReverseEnd) {
+    Gallery.prototype.scrollscreen = function () {
         var base = this,
-            pointsToMove = -(base.current * base.wrapper.xSize);
+            pointsToMove = -(base.current * base.xSize);
+
 
         base.currentTranslatePosition = pointsToMove;
         base.animateScreen(pointsToMove);
     };
 
+    Gallery.prototype.scrollscreenWA = function (pointsToMove) {
+        var base = this;
+        base.currentTranslatePosition = pointsToMove;
+        base.animateScreen(pointsToMove);
+    };
+
+
 
     Gallery.prototype.animateScreen = function (pointsToMove) {
         var base = this;
+
         base.setCurrentClass();
 
         //		var newCurrent = base.wrapper.eq(base.current);
         //		var newHeight = newCurrent.height();
         //
-        //		if (newHeight > base.wrapper.ySize) {
-        //			newHeight = base.wrapper.ySize;
+        //		if (newHeight > base.ySize) {
+        //			newHeight = base.ySize;
         //			newCurrent.addClass("controlHeight").height(newHeight);
         //
         //		}
 
 
 
-        if (base.options.multipleSlides > 1) {
-            if (base.isTranslate3d) {
-                base.subPlaceholder.css({
-                    "transform": "translate3d(" + pointsToMove + "px,0,0)"
-                });
-            } else if (base.isTranslate2d) {
-                base.subPlaceholder.css({
-                    "transform": "translate(" + pointsToMove + "px,0)"
-                });
-            } else {
-                base.subPlaceholder.css({
-                    "left": pointsToMove + "px"
-                });
-            }
+        //if (base.options.multipleSlides > 1) {
+        if (base.isTranslate3d) {
+            base.subPlaceholder.css({
+                "transform": "translate3d(" + pointsToMove + "px,0,0)"
+            });
+        } else if (base.isTranslate2d) {
+            base.subPlaceholder.css({
+                "transform": "translate(" + pointsToMove + "px,0)"
+            });
+        } else {
+            base.subPlaceholder.css({
+                "left": pointsToMove + "px"
+            });
         }
+        //}
 
 
     };
@@ -179,10 +208,42 @@ define(["jquery", "mainClass", "checkCssSupport"], function ($, Gallery, checkCs
             slide.addClass('activeSlider');
         }
 
+        base.dots.removeClass('currentDot');
+        //base.dots.eq(base.options.steps - (Math.ceil((base.current + 1) / base.options.steps))).addClass('currentDot');
+        base.dots.eq(Math.floor(base.current / base.options.steps) - 1).addClass('currentDot');
+        // console.log(base.current, base.options.steps, base.options.multipleSlides);
+
+
         base.subPlaceholder.height(tallSlide);
     };
 
 
+    Gallery.prototype.createDotsNavigation = function () {
+        var base = this,
+            slides = 0,
+            per = Math.ceil(base.noOfSlides / base.options.steps),
+            _div = $('<div>').attr({
+                'class': 'dotNavigation'
+            });
+
+        for (slides; slides < per; slides += 1) {
+            var _figure = $('<figure class="dotMenu">'),
+                _span = $('<span>');
+            _span.appendTo(_figure);
+            _figure.appendTo(_div).on('click', function () {
+                base.onThumbClick(this, base);
+            });
+        }
+        var level_three = $("<div>").attr({
+            'class': 'level-three'
+        });
+        level_three.appendTo(base.$el);
+        //console.log(_div.find(".dotMenu").length)
+        level_three.html(_div);
+
+        base.dots = level_three.find('.dotMenu');
+
+    };
 
 
 
