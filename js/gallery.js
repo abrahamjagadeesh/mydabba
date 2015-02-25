@@ -33,15 +33,12 @@ require(["jquery", "mainClass", "helpers", "addHandlers", "addEvents"], function
 
 	}($));
 
-	//	(function (Gallery) {
-	//		Gallery.prototype.nextScreenfn = function () {
-	//			console.log('next');
-	//		};
-	//	}(_gallery));
 
 	$(function () {
 		"use strict";
-		$("#plot").gallery();
+		$("#plot").gallery({
+		  transition:"fadeInRight"
+		});
 	});
 
 });
